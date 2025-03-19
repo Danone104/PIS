@@ -14,7 +14,7 @@ namespace AIS1
 
             List<BaseMeter> list = new List<BaseMeter>();
 
-            string descr1 = "MeterReadings ResourseType \"Cold       Water\" Date 2013.11.12 Value 2003.2 ManTemperature Name \"Pasha \" Date 2015.10.11 Value 36.7 Location 20.2 30.2 ";
+            string descr1 = "MeterReadings ResourseType \"Cold       Water Date 2013.11.12 Value 2003.2 ManTemperature Name \"Pasha \" Date 2015.10.11 Value 36.7 Location 20.2 30.2 ";
             list = creator.CreateObjects(descr1);
             for(int i = 0; i < list.Count; i++)
             {

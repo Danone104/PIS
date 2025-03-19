@@ -39,6 +39,10 @@ namespace AIS1
                     currentCountObjects++;
 
                 }
+                else
+                {
+                    throw new Exception($"Неизвестный тип");
+                }
             }
             return objects;
             
@@ -69,12 +73,21 @@ namespace AIS1
                 if (ParseWord(position, description).Item1 != "MeterReadings" & ParseWord(position, description).Item1
                 != "ManTemperature")
                 {
-                    string propertyName = ParseWord(position, description).Item1;
-                    PropertyInfo property = prototype.GetType().GetProperty(propertyName);
-                    position = ParseWord(position, description).Item2;
-                    object propertyValue = Convert.ChangeType(ParseWord(position, description).Item1, property.PropertyType, CultureInfo.InvariantCulture);
-                    position = ParseWord(position, description).Item2;
-                    property.SetValue(prototype, propertyValue, null);
+                    
+                        string propertyName = ParseWord(position, description).Item1;
+                        PropertyInfo property = prototype.GetType().GetProperty(propertyName);
+                        position = ParseWord(position, description).Item2;
+                        try
+                        {
+                            object propertyValue = Convert.ChangeType(ParseWord(position, description).Item1, property.PropertyType, CultureInfo.InvariantCulture);
+                        position = ParseWord(position, description).Item2;
+                        property.SetValue(prototype, propertyValue, null);
+                        }
+                        catch (FormatException ex)
+                        {
+                        throw new FormatException($"Ошибка преобразования значения свойства '{propertyName}': {ex.Message}", ex);
+                        }
+
                 }
                 else
                 {
@@ -95,21 +108,39 @@ namespace AIS1
             
             while (position + CountSpaces(position, description) < description.Length)
             {
+                
                 if (ParseWord(position, description).Item1 != "MeterReadings" & ParseWord(position, description).Item1
                 != "ManTemperature")
                 {
+                    
                     string propertyName = ParseWord(position, description).Item1;
                     position = ParseWord(position, description).Item2;
+                    
                     if (propertyName == "Location")
                     {
-                        (prototype.Location, position) = ParseLocation(description, position);
+                        try
+                        {
+                            (prototype.Location, position) = ParseLocation(description, position);
+                        }
+                        catch(FormatException ex)
+                        {
+                            throw new FormatException($"Ошибка преобразования значения свойства '{propertyName}': {ex.Message}", ex);
+                        }
                     }
                     else
                     {
-                        PropertyInfo property = prototype.GetType().GetProperty(propertyName);
-                        object propertyValue = Convert.ChangeType(ParseWord(position, description).Item1, property.PropertyType, CultureInfo.InvariantCulture);
-                        position = ParseWord(position, description).Item2;
-                        property.SetValue(prototype, propertyValue, null);
+                        try
+                        {
+                            PropertyInfo property = prototype.GetType().GetProperty(propertyName);
+                            object propertyValue = Convert.ChangeType(ParseWord(position, description).Item1, property.PropertyType, CultureInfo.InvariantCulture);
+                            position = ParseWord(position, description).Item2;
+                            property.SetValue(prototype, propertyValue, null);
+                        }
+                        
+                        catch(FormatException ex)
+                        {
+                            throw new FormatException($"Ошибка преобразования значения свойства '{propertyName}': {ex.Message}", ex);
+                        }
 
                     }
                 }
@@ -125,12 +156,14 @@ namespace AIS1
         }
         private (Location,int) ParseLocation(string description,int position)
         {
-            string lat = ParseWord(position, description).Item1;
-            position = ParseWord(position, description).Item2;
-            string longitude = ParseWord(position, description).Item1;
-            position = ParseWord(position, description).Item2;
-            Location loc = new Location() { Lat = Convert.ToDouble(lat, CultureInfo.InvariantCulture), Longitude = Convert.ToDouble(longitude, CultureInfo.InvariantCulture) };
-            return (loc, position);
+
+                string lat = ParseWord(position, description).Item1;
+                position = ParseWord(position, description).Item2;
+                string longitude = ParseWord(position, description).Item1;
+                position = ParseWord(position, description).Item2;
+                Location loc = new Location() { Lat = Convert.ToDouble(lat, CultureInfo.InvariantCulture), Longitude = Convert.ToDouble(longitude, CultureInfo.InvariantCulture) };
+                return (loc, position);
+           
         }
         
         private int CountSpaces(int pos,string str)
@@ -149,17 +182,52 @@ namespace AIS1
             return count;
         }
         private (string,int) ParseString(int pos,string descr)
-        {
-            string str = "";
-            char c = '\"';
-            pos++;
-            while (descr[pos] !=c)
+        {       
             {
-                str += descr[pos];
+                string str = "";
+                char c = '\"';
                 pos++;
+                if (descr.Count(s => s == c) % 2 != 0)
+                {
+                    CheckForException(pos, descr);
+                }
+                while (descr[pos] != c)
+                {
+                    str += descr[pos];
+                    pos++;
+                }
+                pos++;
+                return (str, pos);
             }
-            pos++;
-            return (str, pos);
+            
+            
+        }
+        private void CheckForException(int pos,string descr)
+        {
+            char c = '\"';
+            int wordsAfterSymbol = 0;
+            int posAfterSymbol = pos;
+            while (posAfterSymbol + CountSpaces(posAfterSymbol, descr) < descr.Length)
+            {
+
+                posAfterSymbol = ParseWord(posAfterSymbol, descr).Item2;
+                wordsAfterSymbol++;
+
+                if (wordsAfterSymbol > 5 || posAfterSymbol + CountSpaces(posAfterSymbol, descr) >= descr.Length)
+                {
+                    string str = "";
+                    while (pos <= posAfterSymbol)
+                    {
+                        str += descr[pos];
+                        pos++;
+                    }
+                    throw new Exception($"Нет закрывающей ковычки на этом промежутке: {str}");
+                }
+                if (ParseWord(posAfterSymbol, descr).Item1.Last() == c)
+                {
+                    break;
+                }
+            }
         }
         private (string,int) ParseWord(int pos,string descr)
         {
@@ -187,29 +255,7 @@ namespace AIS1
             }
             return (str, pos);
         }
-        private int FindPosAfterTypeName(string descr,string typeName)
-        {
-            string str = "";
-            int pos = 0;
-            
-            foreach (char c in descr)
-            {
-                if (str == typeName)
-                {
-                    
-                    pos++;
-                    break;
-
-                }
-                else
-                {
-                    str += c;
-                    pos++;
-                }
-                
-            }
-            return pos;
-        }
+       
       
 
                 
