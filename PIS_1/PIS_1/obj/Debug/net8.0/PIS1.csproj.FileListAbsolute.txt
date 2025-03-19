@@ -1,0 +1,42 @@
+A:\source\repos\AIS1\bin\Debug\net8.0\PIS1.exe
+A:\source\repos\AIS1\bin\Debug\net8.0\PIS1.deps.json
+A:\source\repos\AIS1\bin\Debug\net8.0\PIS1.runtimeconfig.json
+A:\source\repos\AIS1\bin\Debug\net8.0\PIS1.dll
+A:\source\repos\AIS1\bin\Debug\net8.0\PIS1.pdb
+A:\source\repos\AIS1\obj\Debug\net8.0\PIS1.GeneratedMSBuildEditorConfig.editorconfig
+A:\source\repos\AIS1\obj\Debug\net8.0\PIS1.AssemblyInfoInputs.cache
+A:\source\repos\AIS1\obj\Debug\net8.0\PIS1.AssemblyInfo.cs
+A:\source\repos\AIS1\obj\Debug\net8.0\PIS1.csproj.CoreCompileInputs.cache
+A:\source\repos\AIS1\obj\Debug\net8.0\PIS1.dll
+A:\source\repos\AIS1\obj\Debug\net8.0\refint\PIS1.dll
+A:\source\repos\AIS1\obj\Debug\net8.0\PIS1.pdb
+A:\source\repos\AIS1\obj\Debug\net8.0\PIS1.genruntimeconfig.cache
+A:\source\repos\AIS1\obj\Debug\net8.0\ref\PIS1.dll
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.exe
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.deps.json
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.runtimeconfig.json
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.dll
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.pdb
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.AssemblyInfoInputs.cache
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.AssemblyInfo.cs
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.csproj.CoreCompileInputs.cache
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.dll
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\obj\Debug\net8.0\refint\PIS1.dll
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.pdb
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.genruntimeconfig.cache
+C:\Users\danyk\OneDrive\Рабочий стол\PIS_1\PIS_1\obj\Debug\net8.0\ref\PIS1.dll
+A:\PIS_1 (2)\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.exe
+A:\PIS_1 (2)\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.deps.json
+A:\PIS_1 (2)\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.runtimeconfig.json
+A:\PIS_1 (2)\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.dll
+A:\PIS_1 (2)\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.pdb
+A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.GeneratedMSBuildEditorConfig.editorconfig
+A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.AssemblyInfoInputs.cache
+A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.AssemblyInfo.cs
+A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.csproj.CoreCompileInputs.cache
+A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.dll
+A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\refint\PIS1.dll
+A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.pdb
+A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.genruntimeconfig.cache
+A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\ref\PIS1.dll

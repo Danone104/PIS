@@ -1,0 +1,14 @@
+A:\source\repos\AIS1\bin\Debug\net8.0\AIS1.exe
+A:\source\repos\AIS1\bin\Debug\net8.0\AIS1.deps.json
+A:\source\repos\AIS1\bin\Debug\net8.0\AIS1.runtimeconfig.json
+A:\source\repos\AIS1\bin\Debug\net8.0\AIS1.dll
+A:\source\repos\AIS1\bin\Debug\net8.0\AIS1.pdb
+A:\source\repos\AIS1\obj\Debug\net8.0\AIS1.GeneratedMSBuildEditorConfig.editorconfig
+A:\source\repos\AIS1\obj\Debug\net8.0\AIS1.AssemblyInfoInputs.cache
+A:\source\repos\AIS1\obj\Debug\net8.0\AIS1.AssemblyInfo.cs
+A:\source\repos\AIS1\obj\Debug\net8.0\AIS1.csproj.CoreCompileInputs.cache
+A:\source\repos\AIS1\obj\Debug\net8.0\AIS1.dll
+A:\source\repos\AIS1\obj\Debug\net8.0\refint\AIS1.dll
+A:\source\repos\AIS1\obj\Debug\net8.0\AIS1.pdb
+A:\source\repos\AIS1\obj\Debug\net8.0\AIS1.genruntimeconfig.cache
+A:\source\repos\AIS1\obj\Debug\net8.0\ref\AIS1.dll
