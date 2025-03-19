@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,77 +13,113 @@ namespace AIS1
     public class ObjectCreator
     {
 
-        public BaseMeter CreateObject(string descr)
+        public List<BaseMeter> CreateObjects(string descr)
         {
-            string description = descr;
-            string typeName = description.Split(' ')[0];
-
-            BaseMeter obj=new BaseMeter();
-
-            if (typeName == "MeterReadings") 
+            int pos = 0;
+            List<BaseMeter> objects = new List<BaseMeter>();   
+            int currentCountObjects = 0;
+            int countObjects=CountObjects(descr, pos);
+            while (currentCountObjects != countObjects)
             {
-               
-                obj=SetPropertyForMeterReadings(descr);
-                return obj;
+                string typeName = ParseWord(pos, descr).Item1;
+                pos=ParseWord(pos, descr).Item2;
+                if (typeName == "MeterReadings")
+                {
+                    BaseMeter obj = new BaseMeter();
+                    (obj,pos) = SetPropertyForMeterReadings(pos,descr);
+                    objects.Add(obj);
+                    currentCountObjects++;
 
+                }
+                if (typeName == "ManTemperature")
+                {
+                    BaseMeter obj = new BaseMeter();
+                    (obj, pos) = SetPropertyForManTemperature(pos, descr);
+                    objects.Add(obj);
+                    currentCountObjects++;
+
+                }
             }
-            if (typeName == "ManTemperature")
-            {
-                
-                obj = SetPropertyForManTemperature(descr);
-                return obj;
-            }
-            else
-            {
-                return obj;
-            }
+            return objects;
             
         }
-        private MeterReadings SetPropertyForMeterReadings( string description)
+        private int CountObjects(string description,int position)
+        {
+            string name = "";
+            int countObjects = 0;
+            while (position + CountSpaces(position, description) < description.Length)
+            {
+                name=ParseWord(position, description).Item1;
+                position=ParseWord(position, description).Item2;
+                if (name == "MeterReadings" || name == "ManTemperature")
+                {
+                    countObjects++; 
+                }
+            }
+            return countObjects;
+             
+
+        }
+        private (MeterReadings,int) SetPropertyForMeterReadings(int position, string description)
         {
             MeterReadings prototype = new MeterReadings();
-            int position = FindPosAfterTypeName(description, description.Split(' ')[0]);
             
             while (position + CountSpaces(position, description) < description.Length)
             {
-                string propertyName = ParseWord(position, description).Item1;
-                PropertyInfo property = prototype.GetType().GetProperty(propertyName);
-                position = ParseWord(position, description).Item2;
-                object propertyValue = Convert.ChangeType(ParseWord(position, description).Item1, property.PropertyType, CultureInfo.InvariantCulture);
-                position = ParseWord(position, description).Item2;
-                property.SetValue(prototype, propertyValue, null);
-                
-                
-
-            }
-            
-            return prototype;
-
-
-        }
-        private ManTemperature SetPropertyForManTemperature(string description)
-        {
-            ManTemperature prototype = new ManTemperature();
-            int position = FindPosAfterTypeName(description, description.Split(' ')[0]);
-            while (position + CountSpaces(position, description) < description.Length)
-            {
-                string propertyName = ParseWord(position, description).Item1;
-                position = ParseWord(position, description).Item2;
-                if (propertyName == "Location")
+                if (ParseWord(position, description).Item1 != "MeterReadings" & ParseWord(position, description).Item1
+                != "ManTemperature")
                 {
-                    prototype.Location = ParseLocation(description,position).Item1;
-                    position= ParseLocation(description,position).Item2;
+                    string propertyName = ParseWord(position, description).Item1;
+                    PropertyInfo property = prototype.GetType().GetProperty(propertyName);
+                    position = ParseWord(position, description).Item2;
+                    object propertyValue = Convert.ChangeType(ParseWord(position, description).Item1, property.PropertyType, CultureInfo.InvariantCulture);
+                    position = ParseWord(position, description).Item2;
+                    property.SetValue(prototype, propertyValue, null);
                 }
                 else
                 {
-                    PropertyInfo property = prototype.GetType().GetProperty(propertyName);
-                    object propertyValue = Convert.ChangeType(ParseWord(position, description).Item1, property.PropertyType,CultureInfo.InvariantCulture);
-                    position = ParseWord(position, description).Item2;
-                    property.SetValue(prototype, propertyValue, null);
-                    
+                    break;
                 }
+                
+                
+
             }
-            return prototype;
+            
+            return (prototype,position);
+
+
+        }
+        private (ManTemperature,int) SetPropertyForManTemperature(int position,string description)
+        {
+            ManTemperature prototype = new ManTemperature();
+            
+            while (position + CountSpaces(position, description) < description.Length)
+            {
+                if (ParseWord(position, description).Item1 != "MeterReadings" & ParseWord(position, description).Item1
+                != "ManTemperature")
+                {
+                    string propertyName = ParseWord(position, description).Item1;
+                    position = ParseWord(position, description).Item2;
+                    if (propertyName == "Location")
+                    {
+                        (prototype.Location, position) = ParseLocation(description, position);
+                    }
+                    else
+                    {
+                        PropertyInfo property = prototype.GetType().GetProperty(propertyName);
+                        object propertyValue = Convert.ChangeType(ParseWord(position, description).Item1, property.PropertyType, CultureInfo.InvariantCulture);
+                        position = ParseWord(position, description).Item2;
+                        property.SetValue(prototype, propertyValue, null);
+
+                    }
+                }
+                else
+                {
+                    break;
+                }
+                    
+            }
+            return (prototype,position);
 
 
         }
