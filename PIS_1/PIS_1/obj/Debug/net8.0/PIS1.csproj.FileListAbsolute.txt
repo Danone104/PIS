@@ -40,3 +40,18 @@ A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\refint\PIS1.dll
 A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.pdb
 A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.genruntimeconfig.cache
 A:\PIS_1 (2)\PIS_1\PIS_1\obj\Debug\net8.0\ref\PIS1.dll
+A:\PIS\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.GeneratedMSBuildEditorConfig.editorconfig
+A:\PIS\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.AssemblyInfoInputs.cache
+A:\PIS\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.AssemblyInfo.cs
+A:\PIS\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.csproj.CoreCompileInputs.cache
+A:\PIS\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.sourcelink.json
+A:\PIS\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.dll
+A:\PIS\PIS_1\PIS_1\obj\Debug\net8.0\refint\PIS1.dll
+A:\PIS\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.pdb
+A:\PIS\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.exe
+A:\PIS\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.deps.json
+A:\PIS\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.runtimeconfig.json
+A:\PIS\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.dll
+A:\PIS\PIS_1\PIS_1\bin\Debug\net8.0\PIS1.pdb
+A:\PIS\PIS_1\PIS_1\obj\Debug\net8.0\PIS1.genruntimeconfig.cache
+A:\PIS\PIS_1\PIS_1\obj\Debug\net8.0\ref\PIS1.dll

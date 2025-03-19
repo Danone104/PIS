@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "A:\\PIS_1 (2)\\PIS_1\\PIS_1\\PIS1.csproj": {}
+    "A:\\PIS\\PIS_1\\PIS_1\\PIS1.csproj": {}
   },
   "projects": {
-    "A:\\PIS_1 (2)\\PIS_1\\PIS_1\\PIS1.csproj": {
+    "A:\\PIS\\PIS_1\\PIS_1\\PIS1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "A:\\PIS_1 (2)\\PIS_1\\PIS_1\\PIS1.csproj",
+        "projectUniqueName": "A:\\PIS\\PIS_1\\PIS_1\\PIS1.csproj",
         "projectName": "PIS1",
-        "projectPath": "A:\\PIS_1 (2)\\PIS_1\\PIS_1\\PIS1.csproj",
+        "projectPath": "A:\\PIS\\PIS_1\\PIS_1\\PIS1.csproj",
         "packagesPath": "C:\\Users\\DANIIL\\.nuget\\packages\\",
-        "outputPath": "A:\\PIS_1 (2)\\PIS_1\\PIS_1\\obj\\",
+        "outputPath": "A:\\PIS\\PIS_1\\PIS_1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
