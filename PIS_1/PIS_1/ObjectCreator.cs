@@ -38,7 +38,7 @@ namespace AIS1
             }
             
         }
-        public MeterReadings SetPropertyForMeterReadings( string description)
+        private MeterReadings SetPropertyForMeterReadings( string description)
         {
             MeterReadings prototype = new MeterReadings();
             int position = FindPosAfterTypeName(description, description.Split(' ')[0]);
@@ -60,52 +60,43 @@ namespace AIS1
 
 
         }
-        public ManTemperature SetPropertyForManTemperature(string description)
+        private ManTemperature SetPropertyForManTemperature(string description)
         {
             ManTemperature prototype = new ManTemperature();
             int position = FindPosAfterTypeName(description, description.Split(' ')[0]);
-            
             while (position + CountSpaces(position, description) < description.Length)
             {
-
                 string propertyName = ParseWord(position, description).Item1;
-                
                 position = ParseWord(position, description).Item2;
-                
                 if (propertyName == "Location")
                 {
-                    
-                    string lat = ParseWord(position, description).Item1;
-                    position = ParseWord(position, description).Item2;
-                    
-                    string longitude = ParseWord(position, description).Item1;
-                    position = ParseWord(position, description).Item2;
-                  
-                    Location loc = new Location() { Lat = Convert.ToDouble(lat, CultureInfo.InvariantCulture), Longitude= Convert.ToDouble(longitude, CultureInfo.InvariantCulture) };
-                    prototype.Location = loc;
-                    
-
-
+                    prototype.Location = ParseLocation(description,position).Item1;
+                    position= ParseLocation(description,position).Item2;
                 }
                 else
                 {
                     PropertyInfo property = prototype.GetType().GetProperty(propertyName);
-
                     object propertyValue = Convert.ChangeType(ParseWord(position, description).Item1, property.PropertyType,CultureInfo.InvariantCulture);
-                    
                     position = ParseWord(position, description).Item2;
                     property.SetValue(prototype, propertyValue, null);
                     
                 }
-
-                
             }
             return prototype;
 
 
         }
+        private (Location,int) ParseLocation(string description,int position)
+        {
+            string lat = ParseWord(position, description).Item1;
+            position = ParseWord(position, description).Item2;
+            string longitude = ParseWord(position, description).Item1;
+            position = ParseWord(position, description).Item2;
+            Location loc = new Location() { Lat = Convert.ToDouble(lat, CultureInfo.InvariantCulture), Longitude = Convert.ToDouble(longitude, CultureInfo.InvariantCulture) };
+            return (loc, position);
+        }
         
-        public int CountSpaces(int pos,string str)
+        private int CountSpaces(int pos,string str)
         {
             int count = 0;
             
@@ -120,7 +111,7 @@ namespace AIS1
             }
             return count;
         }
-        public (string,int) ParseString(int pos,string descr)
+        private (string,int) ParseString(int pos,string descr)
         {
             string str = "";
             char c = '\"';
@@ -133,7 +124,7 @@ namespace AIS1
             pos++;
             return (str, pos);
         }
-        public (string,int) ParseWord(int pos,string descr)
+        private (string,int) ParseWord(int pos,string descr)
         {
             pos += CountSpaces(pos, descr);
             string str = "";
@@ -159,7 +150,7 @@ namespace AIS1
             }
             return (str, pos);
         }
-        public int FindPosAfterTypeName(string descr,string typeName)
+        private int FindPosAfterTypeName(string descr,string typeName)
         {
             string str = "";
             int pos = 0;
