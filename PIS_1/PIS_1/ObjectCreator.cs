@@ -214,6 +214,7 @@ namespace AIS1
                 {
                     countObjects++;
                 }
+                
             }
             return countObjects;
 
@@ -221,12 +222,18 @@ namespace AIS1
         }
         public int CountSpaces(int pos, string str)
         {
+            
             int count = 0;
+            int position = pos;
+            if (pos == str.Length)
+            {
+                return count;
+            }
 
-            while (str[pos + count] == ' ')
+            while (str[position + count] == ' ')
             {
                 count++;
-                if (pos + count >= str.Length)
+                if (position + count >= str.Length)
                 {
                     break;
                 }

@@ -3,6 +3,12 @@
   "WorkspaceRootPath": "A:\\PIS\\PIS_1\\PIS_1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{30C71B09-DA1B-43B4-9233-E907028A43A0}|..\\ObjectCreatorTests\\ObjectCreatorTests.csproj|a:\\pis\\pis_1\\objectcreatortests\\test1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C71B09-DA1B-43B4-9233-E907028A43A0}|..\\ObjectCreatorTests\\ObjectCreatorTests.csproj|a:\\pis\\pis_1\\objectcreatortests\\mstestsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CD0F30E9-52DE-4817-B081-620160B42B82}|PIS1.csproj|a:\\pis\\pis_1\\pis_1\\objectcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD0F30E9-52DE-4817-B081-620160B42B82}|PIS1.csproj|solutionrelative:objectcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -21,6 +27,13 @@
     {
       "AbsoluteMoniker": "D:0:0:{CD0F30E9-52DE-4817-B081-620160B42B82}|PIS1.csproj|a:\\pis\\pis_1\\pis_1\\basemeter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD0F30E9-52DE-4817-B081-620160B42B82}|PIS1.csproj|solutionrelative:basemeter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30C71B09-DA1B-43B4-9233-E907028A43A0}|..\\ObjectCreatorTests\\ObjectCreatorTests.csproj|a:\\pis\\pis_1\\objectcreatortests\\objectcreatortests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD0F30E9-52DE-4817-B081-620160B42B82}|PIS1.csproj|a:\\pis\\pis_1\\pis_1\\pis1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{CD0F30E9-52DE-4817-B081-620160B42B82}|PIS1.csproj|solutionrelative:pis1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +43,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,7 +59,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
+              "Title": "ObjectCreatorTests",
+              "DocumentMoniker": "A:\\PIS\\PIS_1\\ObjectCreatorTests\\ObjectCreatorTests.csproj",
+              "RelativeDocumentMoniker": "..\\ObjectCreatorTests\\ObjectCreatorTests.csproj",
+              "ToolTip": "A:\\PIS\\PIS_1\\ObjectCreatorTests\\ObjectCreatorTests.csproj",
+              "RelativeToolTip": "..\\ObjectCreatorTests\\ObjectCreatorTests.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-20T06:51:02.566Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PIS1",
+              "DocumentMoniker": "A:\\PIS\\PIS_1\\PIS_1\\PIS1.csproj",
+              "RelativeDocumentMoniker": "PIS1.csproj",
+              "ToolTip": "A:\\PIS\\PIS_1\\PIS_1\\PIS1.csproj",
+              "RelativeToolTip": "PIS1.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-20T06:51:00.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Test1.cs",
+              "DocumentMoniker": "A:\\PIS\\PIS_1\\ObjectCreatorTests\\Test1.cs",
+              "RelativeDocumentMoniker": "..\\ObjectCreatorTests\\Test1.cs",
+              "ToolTip": "A:\\PIS\\PIS_1\\ObjectCreatorTests\\Test1.cs",
+              "RelativeToolTip": "..\\ObjectCreatorTests\\Test1.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-20T06:50:53.009Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MSTestSettings.cs",
+              "DocumentMoniker": "A:\\PIS\\PIS_1\\ObjectCreatorTests\\MSTestSettings.cs",
+              "RelativeDocumentMoniker": "..\\ObjectCreatorTests\\MSTestSettings.cs",
+              "ToolTip": "A:\\PIS\\PIS_1\\ObjectCreatorTests\\MSTestSettings.cs",
+              "RelativeToolTip": "..\\ObjectCreatorTests\\MSTestSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-20T06:48:20.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "BaseMeter.cs",
               "DocumentMoniker": "A:\\PIS\\PIS_1\\PIS_1\\BaseMeter.cs",
               "RelativeDocumentMoniker": "BaseMeter.cs",
@@ -54,11 +119,12 @@
               "RelativeToolTip": "BaseMeter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-03T06:52:22.006Z"
+              "WhenOpened": "2025-03-03T06:52:22.006Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "ManTemperature.cs",
               "DocumentMoniker": "A:\\PIS\\PIS_1\\PIS_1\\ManTemperature.cs",
               "RelativeDocumentMoniker": "ManTemperature.cs",
@@ -71,39 +137,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "MeterReadings.cs",
               "DocumentMoniker": "A:\\PIS\\PIS_1\\PIS_1\\MeterReadings.cs",
               "RelativeDocumentMoniker": "MeterReadings.cs",
               "ToolTip": "A:\\PIS\\PIS_1\\PIS_1\\MeterReadings.cs",
               "RelativeToolTip": "MeterReadings.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAABiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-21T16:19:02.756Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "ObjectCreator.cs",
               "DocumentMoniker": "A:\\PIS\\PIS_1\\PIS_1\\ObjectCreator.cs",
               "RelativeDocumentMoniker": "ObjectCreator.cs",
               "ToolTip": "A:\\PIS\\PIS_1\\PIS_1\\ObjectCreator.cs",
               "RelativeToolTip": "ObjectCreator.cs",
-              "ViewState": "AgIAAOkAAAAAAAAAAAAswPYAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAANUAAAAAAAAAAAAhwN4AAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-21T16:17:51.512Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "A:\\PIS\\PIS_1\\PIS_1\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "A:\\PIS\\PIS_1\\PIS_1\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-21T16:16:55.761Z",
               "EditorCaption": ""
