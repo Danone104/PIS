@@ -4,141 +4,184 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AIS1
 {
-    public class ObjectCreator
+    public class ObjectParser()
     {
 
-        public BaseMeter CreateObject(string descr)
+        private ObjectDescriptor descriptor;
+        public ObjectParser(ObjectDescriptor descriptor) : this()
         {
-            string description = descr;
-            string typeName = description.Split(' ')[0];
-
-            BaseMeter obj=new BaseMeter();
-
-            if (typeName == "MeterReadings") 
-            {
-               
-                obj=SetPropertyForMeterReadings(descr);
-                return obj;
-
-            }
-            if (typeName == "ManTemperature")
-            {
-                
-                obj = SetPropertyForManTemperature(descr);
-                return obj;
-            }
-            else
-            {
-                return obj;
-            }
-            
+            this.descriptor = descriptor;
         }
-        public MeterReadings SetPropertyForMeterReadings( string description)
+        public (MeterReadings, int) SetPropertyForMeterReadings(int position, string description)
         {
             MeterReadings prototype = new MeterReadings();
-            int position = FindPosAfterTypeName(description, description.Split(' ')[0]);
-            
-            while (position + CountSpaces(position, description) < description.Length)
+            ObjectDescriptor descriptor=new ObjectDescriptor();
+            while (position + descriptor.CountSpaces(position, description) < description.Length)
             {
-                string propertyName = ParseWord(position, description).Item1;
-                PropertyInfo property = prototype.GetType().GetProperty(propertyName);
-                position = ParseWord(position, description).Item2;
-                object propertyValue = Convert.ChangeType(ParseWord(position, description).Item1, property.PropertyType, CultureInfo.InvariantCulture);
-                position = ParseWord(position, description).Item2;
-                property.SetValue(prototype, propertyValue, null);
-                
-                
-
-            }
-            
-            return prototype;
-
-
-        }
-        public ManTemperature SetPropertyForManTemperature(string description)
-        {
-            ManTemperature prototype = new ManTemperature();
-            int position = FindPosAfterTypeName(description, description.Split(' ')[0]);
-            
-            while (position + CountSpaces(position, description) < description.Length)
-            {
-
-                string propertyName = ParseWord(position, description).Item1;
-                
-                position = ParseWord(position, description).Item2;
-                
-                if (propertyName == "Location")
+                if (descriptor.ParseWord(position, description).Item1 != "MeterReadings" & descriptor.ParseWord(position, description).Item1
+                != "ManTemperature")
                 {
-                    
-                    string lat = ParseWord(position, description).Item1;
-                    position = ParseWord(position, description).Item2;
-                    
-                    string longitude = ParseWord(position, description).Item1;
-                    position = ParseWord(position, description).Item2;
-                  
-                    Location loc = new Location() { Lat = Convert.ToDouble(lat, CultureInfo.InvariantCulture), Longitude= Convert.ToDouble(longitude, CultureInfo.InvariantCulture) };
-                    prototype.Location = loc;
-                    
 
+                    string propertyName = descriptor.ParseWord(position, description).Item1;
+                    PropertyInfo property = prototype.GetType().GetProperty(propertyName);
+                    position = descriptor.ParseWord(position, description).Item2;
+                    try
+                    {
+                        object propertyValue = Convert.ChangeType(descriptor.ParseWord(position, description).Item1, property.PropertyType, CultureInfo.InvariantCulture);
+                        position = descriptor.ParseWord(position, description).Item2;
+                        property.SetValue(prototype, propertyValue, null);
+                    }
+                    catch (FormatException ex)
+                    {
+                        throw new FormatException($"Ошибка преобразования значения свойства '{propertyName}': {ex.Message}", ex);
+                    }
 
                 }
                 else
                 {
-                    PropertyInfo property = prototype.GetType().GetProperty(propertyName);
-
-                    object propertyValue = Convert.ChangeType(ParseWord(position, description).Item1, property.PropertyType,CultureInfo.InvariantCulture);
-                    
-                    position = ParseWord(position, description).Item2;
-                    property.SetValue(prototype, propertyValue, null);
-                    
+                    break;
                 }
 
-                
+
+
             }
-            return prototype;
+
+            return (prototype, position);
+
+
+        }
+        public (ManTemperature, int) SetPropertyForManTemperature(int position, string description)
+        {
+            ManTemperature prototype = new ManTemperature();
+            ObjectDescriptor descriptor=new ObjectDescriptor();
+            while (position + descriptor.CountSpaces(position, description) < description.Length)
+            {
+
+                if (descriptor.ParseWord(position, description).Item1 != "MeterReadings" & descriptor.ParseWord(position, description).Item1
+                != "ManTemperature")
+                {
+
+                    string propertyName = descriptor.ParseWord(position, description).Item1;
+                    position = descriptor.ParseWord(position, description).Item2;
+
+                    if (propertyName == "Location")
+                    {
+                        try
+                        {
+                            (prototype.Location, position) = descriptor.ParseLocation(description, position);
+                        }
+                        catch (FormatException ex)
+                        {
+                            throw new FormatException($"Ошибка преобразования значения свойства '{propertyName}': {ex.Message}", ex);
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            PropertyInfo property = prototype.GetType().GetProperty(propertyName);
+                            object propertyValue = Convert.ChangeType(descriptor.ParseWord(position, description).Item1, property.PropertyType, CultureInfo.InvariantCulture);
+                            position = descriptor.ParseWord(position, description).Item2;
+                            property.SetValue(prototype, propertyValue, null);
+                        }
+
+                        catch (FormatException ex)
+                        {
+                            throw new FormatException($"Ошибка преобразования значения свойства '{propertyName}': {ex.Message}", ex);
+                        }
+
+                    }
+                }
+                else
+                {
+                    break;
+                }
+
+            }
+            return (prototype, position);
 
 
         }
         
-        public int CountSpaces(int pos,string str)
+    }
+    public class ExceptionHandler
+    {
+        public ExceptionHandler(int pos, string descr,ObjectDescriptor descriptor)
         {
-            int count = 0;
-            
-            while (str[pos+count] ==' ')
+            char c = '\"';
+            int wordsAfterSymbol = 0;
+            int posAfterSymbol = pos;
+            while (posAfterSymbol + descriptor.CountSpaces(posAfterSymbol, descr) < descr.Length)
             {
-                count++;
-                if (pos + count >= str.Length)
+
+                posAfterSymbol = descriptor.ParseWord(posAfterSymbol, descr).Item2;
+                wordsAfterSymbol++;
+
+                if (wordsAfterSymbol > 5 || posAfterSymbol + descriptor.CountSpaces(posAfterSymbol, descr) >= descr.Length)
+                {
+                    string str = "";
+                    while (pos <= posAfterSymbol)
+                    {
+                        str += descr[pos];
+                        pos++;
+                    }
+                    throw new Exception($"Нет закрывающей ковычки на этом промежутке: {str}");
+                }
+                if (descriptor.ParseWord(posAfterSymbol, descr).Item1.Last() == c)
                 {
                     break;
                 }
-                
             }
-            return count;
         }
-        public (string,int) ParseString(int pos,string descr)
+    }
+    public class ObjectDescriptor()
+    {
+       
+        public (Location, int) ParseLocation(string description, int position)
         {
-            string str = "";
-            char c = '\"';
-            pos++;
-            while (descr[pos] !=c)
-            {
-                str += descr[pos];
-                pos++;
-            }
-            pos++;
-            return (str, pos);
+
+            string lat = ParseWord(position, description).Item1;
+            position = ParseWord(position, description).Item2;
+            string longitude = ParseWord(position, description).Item1;
+            position = ParseWord(position, description).Item2;
+            Location loc = new Location() { Lat = Convert.ToDouble(lat, CultureInfo.InvariantCulture), Longitude = Convert.ToDouble(longitude, CultureInfo.InvariantCulture) };
+            return (loc, position);
+
         }
-        public (string,int) ParseWord(int pos,string descr)
+        public (string, int) ParseString(int pos, string descr)
+        {
+            {
+                string str = "";
+                char c = '\"';
+                pos++;
+                if (descr.Count(s => s == c) % 2 != 0)
+                {
+                    ExceptionHandler check=new ExceptionHandler(pos, descr,this);
+                }
+                while (descr[pos] != c)
+                {
+                    str += descr[pos];
+                    pos++;
+                }
+                pos++;
+                return (str, pos);
+            }
+
+
+        }
+        public (string, int) ParseWord(int pos, string descr)
         {
             pos += CountSpaces(pos, descr);
             string str = "";
             int index = pos;
-            while (descr[pos]!= ' ')
+            while (descr[pos] != ' ')
             {
                 if (descr[pos] != '\"')
                 {
@@ -159,37 +202,97 @@ namespace AIS1
             }
             return (str, pos);
         }
-        public int FindPosAfterTypeName(string descr,string typeName)
+        public int CountObjects(string description, int position)
         {
-            string str = "";
-            int pos = 0;
-            
-            foreach (char c in descr)
+            string name = "";
+            int countObjects = 0;
+            while (position + CountSpaces(position, description) < description.Length)
             {
-                if (str == typeName)
+                name = ParseWord(position, description).Item1;
+                position = ParseWord(position, description).Item2;
+                if (name == "MeterReadings" || name == "ManTemperature")
                 {
-                    
-                    pos++;
+                    countObjects++;
+                }
+                
+            }
+            return countObjects;
+
+
+        }
+        public int CountSpaces(int pos, string str)
+        {
+            
+            int count = 0;
+            int position = pos;
+            if (pos == str.Length)
+            {
+                return count;
+            }
+
+            while (str[position + count] == ' ')
+            {
+                count++;
+                if (position + count >= str.Length)
+                {
                     break;
-
                 }
-                else
+
+            }
+            return count;
+        }
+    }
+
+    }
+    
+    public class ObjectCreator
+    {
+        public List<BaseMeter> CreateObjects(string descr)
+        {
+            ObjectDescriptor descriptor=new ObjectDescriptor();
+            ObjectParser parser = new ObjectParser(descriptor);
+            int pos = 0;
+            List<BaseMeter> objects = new List<BaseMeter>();   
+            int currentCountObjects = 0;
+            int countObjects= descriptor.CountObjects(descr, pos);
+            while (currentCountObjects != countObjects)
+            {
+                string typeName = descriptor.ParseWord(pos, descr).Item1;
+                pos= descriptor.ParseWord(pos, descr).Item2;
+                if (typeName == "MeterReadings")
                 {
-                    str += c;
-                    pos++;
+                    BaseMeter obj = new BaseMeter();
+                    (obj,pos) = parser.SetPropertyForMeterReadings(pos,descr);
+                    objects.Add(obj);
+                    currentCountObjects++;
+
                 }
-                
+                if (typeName == "ManTemperature")
+                {
+                    BaseMeter obj = new BaseMeter();
+                    (obj, pos) = parser.SetPropertyForManTemperature(pos, descr);
+                    objects.Add(obj);
+                    currentCountObjects++;
+
+                }
+                if (typeName != "MeterReadings" & typeName != "ManTemperature")
+
+                {
+                    throw new Exception($"Неизвестный тип: {typeName}");
+                }
             }
-            return pos;
+            return objects;
+            
         }
-      
-
-                
-
+       
+        
+       
+        
+       
 
             }
 
-        }
+        
     
    
 
